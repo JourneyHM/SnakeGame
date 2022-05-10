@@ -2,12 +2,12 @@
 Juego: Snake
 
 Programador 1: Iván Santiago Hernández Mendoza - A01662556
-Programador 2: Diego Jacobo - 
+Programador 2: Diego Jacobo Martínez - A01656583 
 
 Fecha: 9 / 05 / 2022
 """
 
-from random import randrange
+from random import randint, randrange
 from turtle import *
 
 from freegames import square, vector
@@ -15,6 +15,14 @@ from freegames import square, vector
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+colours = ['black','green','yellow','purple','blue']
+colour = randint(0,4)
+colourF = randint(0,4)
+while (colour==colourF): colourF = randint(0,4)
+
+def getColour(i):
+    colour = colours[i]
+    return colour
 
 
 def change(x, y):
@@ -50,9 +58,9 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, getColour(colour))
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, getColour(colourF))
     update()
     ontimer(move, 100)
 
