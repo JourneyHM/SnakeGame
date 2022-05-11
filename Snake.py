@@ -2,12 +2,12 @@
 Juego: Snake
 
 Programador 1: Iván Santiago Hernández Mendoza - A01662556
-Programador 2: Diego Jacobo - 
+Programador 2: Diego Jacobo Martínez - A01656583 
 
 Fecha: 9 / 05 / 2022
 """
 
-from random import randrange
+from random import randint, randrange
 from turtle import *
 
 from freegames import square, vector
@@ -15,6 +15,14 @@ from freegames import square, vector
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+colours = ['black','green','yellow','purple','blue']    # Se añade una lista de colores
+colour = randint(0,4)                                   # Se inicializan variables para escoger
+colourF = randint(0,4)                                  # al azar el color de la serpiente y la comida
+while (colour==colourF): colourF = randint(0,4)         # Se compara si son iguales los colores, si si lo son se cambian
+
+def getColour(i):               # Se hace un metodo para obtener el color de la lista
+    colour = colours[i]
+    return colour
 
 
 def change(x, y):
@@ -24,12 +32,10 @@ def change(x, y):
 
 
 def inside(head):
-    """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
 
 
 def move():
-    """Move snake forward one segment."""
     head = snake[-1].copy()
     head.move(aim)
 
@@ -50,9 +56,9 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, getColour(colour)) # Se cambia el color estatico por el aleatorio
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, getColour(colourF)) # Se cambia el color estatico por el aleatorio
     update()
     ontimer(move, 100)
 
