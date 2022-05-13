@@ -39,6 +39,30 @@ def move():
     head = snake[-1].copy()
     head.move(aim)
 
+
+    foodMoves = randint(0,3)
+
+    if (foodMoves == 0):                                 # Movimiento de la comida un paso a la vez
+        foodAim = randint(0,3)
+        if (foodAim == 0) & (inside(food)==True):
+            food.move(vector(0, -10))
+        elif (foodAim == 1) & (inside(food)==True):
+            food.move(vector(0, 10))
+        elif (foodAim == 2) & (inside(food)==True):
+            food.move(vector(10, 0))
+        elif (foodAim == 3) & (inside(food)==True):
+            food.move(vector(-10, 0))
+        else:
+            if(food.x == -200):
+                food.move(vector(10, 0))
+            elif(food.x == 190):
+                food.move(vector(-10, 0))
+            elif(food.y == -200):
+                food.move(vector(0, 10))
+            elif(food.y == 190):
+                food.move(vector(0, -10))
+
+
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
         update()
